@@ -100,4 +100,13 @@
 
     // ⚙️ Khi tải trang, tự động hiển thị tên và theme
     window.onload = () => {
+
       showName();
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+      }
+    };
+  </script>
+</body>
+</html>

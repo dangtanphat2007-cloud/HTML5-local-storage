@@ -2,40 +2,109 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Ghi chú có giới hạn ký tự</title>
+  <title>📝 Ghi chú & Văn bản (Local Storage + JSON)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 30px;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    textarea {
+    h1 {
+      text-align: center;
+      color: #0078d7;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+    input, textarea {
       width: 100%;
-      font-size: 16px;
       padding: 10px;
-      resize: vertical; /* Cho phép kéo chiều cao */
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      resize: vertical;
     }
-    #counter {
-      text-align: right;
-      font-size: 14px;
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+      margin-right: 5px;
+    }
+    .save { background: #0078d7; }
+    .clear { background: #ff4d4f; }
+    .save:hover { background: #005fa3; }
+    .clear:hover { background: #d9363e; }
+    .info {
+      text-align: center;
       color: gray;
-      margin-top: 5px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <h2>Nhập ghi chú của bạn</h2>
-  <textarea id="content" rows="10" maxlength="200" wrap="soft" placeholder="Nhập nội dung tại đây..."></textarea>
-  <div id="counter">0 / 200 ký tự</div>
+  <h1>📝 Ghi chú & Văn bản</h1>
+  <label for="title">Tiêu đề:</label>
+  <input type="text" id="title" placeholder="Nhập tiêu đề ghi chú...">
+
+  <label for="content">Nội dung:</label>
+  <textarea id="content" rows="10" placeholder="Nhập nội dung văn bản hoặc ghi chú tại đây..."></textarea>
+
+  <div style="text-align: center;">
+    <button class="save" onclick="saveNote()">💾 Lưu</button>
+    <button class="clear" onclick="clearNote()">🗑 Xóa</button>
+  </div>
+
+  <p class="info" id="info"></p>
 
   <script>
-    const textarea = document.getElementById("content");
-    const counter = document.getElementById("counter");
-    const maxLength = textarea.getAttribute("maxlength");
+    const titleBox = document.getElementById("title");
+    const contentBox = document.getElementById("content");
+    const info = document.getElementById("info");
 
-    textarea.addEventListener("input", () => {
-      const length = textarea.value.length;
-      counter.textContent = `${length} / ${maxLength} ký tự`;
-    });
+    // === 1️⃣ Khi trang mở, đọc dữ liệu từ localStorage ===
+    const savedData = localStorage.getItem("noteData");
+    if (savedData) {
+      try {
+        const note = JSON.parse(savedData);
+        titleBox.value = note.title || "";
+        contentBox.value = note.content || "";
+        info.textContent = `📌 Đã khôi phục ghi chú lưu lúc: ${note.savedAt}`;
+      } catch (e) {
+        console.error("Lỗi đọc JSON:", e);
+      }
+    }
+
+    // === 2️⃣ Hàm lưu dữ liệu ===
+    function saveNote() {
+      const noteObj = {
+        title: titleBox.value.trim(),
+        content: contentBox.value.trim(),
+        savedAt: new Date().toLocaleString("vi-VN")
+      };
+      localStorage.setItem("noteData", JSON.stringify(noteObj));
+      info.textContent = `✅ Đã lưu lúc: ${noteObj.savedAt}`;
+      alert("Đã lưu ghi chú thành công!");
+    }
+
+    // === 3️⃣ Hàm xóa dữ liệu ===
+    function clearNote() {
+      if (confirm("Bạn có chắc muốn xóa ghi chú này không?")) {
+        localStorage.removeItem("noteData");
+        titleBox.value = "";
+        contentBox.value = "";
+        info.textContent = "❌ Ghi chú đã bị xóa.";
+      }
+    }
   </script>
 </body>
 </html>

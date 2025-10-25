@@ -2,119 +2,62 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Demo LocalStorage + Light/Dark Theme</title>
-  <style>
-    /* 🌤️ Theme sáng */
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 80px;
-      transition: background-color 0.4s, color 0.4s;
-      background-color: #f5f5f5;
-      color: #222;
-    }
-    input {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      padding: 8px 16px;
-      margin: 5px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .save-btn { background-color: #007bff; color: white; }
-    .show-btn { background-color: #28a745; color: white; }
-    .clear-btn { background-color: #dc3545; color: white; }
-    .theme-btn { background-color: #ffb300; color: #222; }
-
-    /* 🌑 Theme tối */
-    body.dark {
-      background-color: #1e1e1e;
-      color: #f1f1f1;
-    }
-    body.dark input {
-      background-color: #333;
-      color: white;
-      border: 1px solid #555;
-    }
-    body.dark .theme-btn {
-      background-color: #444;
-      color: #f9c74f;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nghiên cứu về Web Storage trong HTML5</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>💾 Demo Local Storage + Giao diện Light/Dark</h2>
-  <p>Nhập tên và lưu lại, chế độ theme cũng sẽ được ghi nhớ!</p>
+  <header>
+    <h1>🔬 Nghiên cứu về Web Storage trong HTML5</h1>
+    <p class="subtitle">Ứng dụng Local Storage và Session Storage trong phát triển web</p>
+  </header>
 
-  <input type="text" id="name" placeholder="Nhập tên...">
-  <br><br>
-  <button class="save-btn" onclick="saveName()">💾 Lưu tên</button>
-  <button class="show-btn" onclick="showName()">👀 Hiển thị tên</button>
-  <button class="clear-btn" onclick="clearName()">🗑️ Xóa tên</button>
-  <br><br>
-  <button class="theme-btn" onclick="toggleTheme()">🌗 Đổi giao diện</button>
-
-  <p id="output"></p>
-
-  <script>
-    // 🌟 Hàm lưu tên vào localStorage
-    function saveName() {
-      const name = document.getElementById("name").value;
-      if (name.trim() === "") {
-        alert("⚠️ Vui lòng nhập tên!");
-        return;
-      }
-      localStorage.setItem("username", name);
-      alert("✅ Đã lưu tên!");
-      showName();
-    }
-
-    // 👀 Hàm hiển thị tên
-    function showName() {
-      const name = localStorage.getItem("username");
-      const output = document.getElementById("output");
-      if (name) {
-        output.textContent = `Xin chào, ${name}! 👋`;
-      } else {
-        output.textContent = "❌ Chưa có tên nào được lưu!";
-      }
-    }
-
-    // 🗑️ Hàm xóa tên
-    function clearName() {
-      localStorage.removeItem("username");
-      document.getElementById("output").textContent = "";
-      alert("🗑️ Đã xóa dữ liệu!");
-    }
-
-    // 🌗 Hàm chuyển đổi theme
-    function toggleTheme() {
-      const isDark = document.body.classList.toggle("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    }
-
-    // ⚙️ Khi tải trang, tự động hiển thị tên và theme
-    window.onload = () => {
-
-      showName();
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "dark") {
-        document.body.classList.add("dark");
-      }
-    };
-  </script>
   <nav>
-    <a href="vd1.html" style="font-size:30px;color: cyan;"> ví dụ 1</a>
-    <a href="vd2.html"style="font-size:30px;color: cyan;">ví dụ 2</a>
+    <a href="index.html">Trang chủ</a>
+    <a href="vd1.html">Ví dụ 1</a>
+    <a href="vd2.html">Ví dụ 2</a>
   </nav>
+
+  <main>
+    <section id="about">
+      <h2>1️⃣ Giới thiệu</h2>
+      <p>
+        Web Storage là một công nghệ trong HTML5 cho phép các trang web lưu trữ dữ liệu trực tiếp trong trình duyệt người dùng.
+        Nó bao gồm hai cơ chế chính:
+      </p>
+      <ul>
+        <li><strong>Local Storage:</strong> lưu dữ liệu vĩnh viễn (ngay cả khi đóng trình duyệt).</li>
+        <li><strong>Session Storage:</strong> lưu dữ liệu tạm thời (chỉ tồn tại trong phiên làm việc hiện tại).</li>
+      </ul>
+    </section>
+
+    <section id="compare">
+      <h2>2️⃣ So sánh với Cookies</h2>
+      <table>
+        <tr><th>Đặc điểm</th><th>Cookies</th><th>Local Storage</th><th>Session Storage</th></tr>
+        <tr><td>Dung lượng</td><td>~4KB</td><td>~5MB</td><td>~5MB</td></tr>
+        <tr><td>Thời gian tồn tại</td><td>Có thể đặt</td><td>Vĩnh viễn</td><td>Trong phiên</td></tr>
+        <tr><td>Gửi kèm khi request</td><td>Có</td><td>Không</td><td>Không</td></tr>
+      </table>
+    </section>
+
+    <section id="demo-link">
+      <h2>3️⃣ Trải nghiệm thử</h2>
+      <p>Bạn có thể xem ví dụ minh hoạ việc sử dụng Local Storage và Session Storage tại đây:</p>
+      <a class="button" href="demo.html">👉 Xem Demo Web Storage</a>
+    </section>
+
+    <section id="conclusion">
+      <h2>4️⃣ Kết luận</h2>
+      <p>
+        Web Storage là công cụ mạnh mẽ giúp các ứng dụng web lưu trữ dữ liệu người dùng mà không cần máy chủ.
+        Với Local và Session Storage, lập trình viên có thể tăng hiệu suất, giảm tải mạng, và mang lại trải nghiệm tốt hơn.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 - Nhóm Nghiên cứu Web Storage | Liên hệ: webstorage@example.com</p>
+  </footer>
 </body>
 </html>
-
-
-
-

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ví dụ về Local storage</title>
+    <style>
+    /* 🌤️ Theme sáng */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 80px;
+      transition: background-color 0.4s, color 0.4s;
+      background-color: #f5f5f5;
+      color: #222;
+    }
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 8px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .save-btn { background-color: #007bff; color: white; }
+    .show-btn { background-color: #28a745; color: white; }
+    .clear-btn { background-color: #dc3545; color: white; }
+    .theme-btn { background-color: #ffb300; color: #222; }
+
+    /* 🌑 Theme tối */
+    body.dark {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+    }
+    body.dark input {
+      background-color: #333;
+      color: white;
+      border: 1px solid #555;
+    }
+    body.dark .theme-btn {
+      background-color: #444;
+      color: #f9c74f;
+    }
+  </style>
+</head>
+<body>
+     <h2>💾 Demo Local Storage + Giao diện Light/Dark</h2>
+  <p>Nhập tên và lưu lại, chế độ theme cũng sẽ được ghi nhớ!</p>
+
+  <input type="text" id="name" placeholder="Nhập tên...">
+  <br><br>
+  <button class="save-btn" onclick="saveName()">💾 Lưu tên</button>
+  <button class="show-btn" onclick="showName()">👀 Hiển thị tên</button>
+  <button class="clear-btn" onclick="clearName()">🗑️ Xóa tên</button>
+  <br><br>
+  <button class="theme-btn" onclick="toggleTheme()">🌗 Đổi giao diện</button>
+
+  <p id="output"></p>
+
+  <script>
+    // 🌟 Hàm lưu tên vào localStorage
+    function saveName() {
+      const name = document.getElementById("name").value;
+      if (name.trim() === "") {
+        alert("⚠️ Vui lòng nhập tên!");
+        return;
+      }
+      localStorage.setItem("username", name);
+      alert("✅ Đã lưu tên!");
+      showName();
+    }
+
+    // 👀 Hàm hiển thị tên
+    function showName() {
+      const name = localStorage.getItem("username");
+      const output = document.getElementById("output");
+      if (name) {
+        output.textContent = `Xin chào, ${name}! 👋`;
+      } else {
+        output.textContent = "❌ Chưa có tên nào được lưu!";
+      }
+    }
+
+    // 🗑️ Hàm xóa tên
+    function clearName() {
+      localStorage.removeItem("username");
+      document.getElementById("output").textContent = "";
+      alert("🗑️ Đã xóa dữ liệu!");
+    }
+
+    // 🌗 Hàm chuyển đổi theme
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    // ⚙️ Khi tải trang, tự động hiển thị tên và theme
+    window.onload = () => {
+      showName();
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+      }
+    };
+  </script>
+</body>
+</html>

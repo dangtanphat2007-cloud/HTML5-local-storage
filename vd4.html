@@ -49,15 +49,24 @@
       color: gray;
       font-size: 14px;
     }
+    .counter {
+      text-align: right;
+      color: #666;
+      font-size: 14px;
+      margin-top: -8px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <h1>📝 Ghi chú & Văn bản</h1>
+
   <label for="title">Tiêu đề:</label>
   <input type="text" id="title" placeholder="Nhập tiêu đề ghi chú...">
 
   <label for="content">Nội dung:</label>
   <textarea id="content" rows="10" placeholder="Nhập nội dung văn bản hoặc ghi chú tại đây..."></textarea>
+  <p class="counter" id="charCount">0 ký tự</p>
 
   <div style="text-align: center;">
     <button class="save" onclick="saveNote()">💾 Lưu</button>
@@ -65,11 +74,16 @@
   </div>
 
   <p class="info" id="info"></p>
+  <p class="info" id="storageInfo">📦 Dung lượng Web Storage đã dùng: 0 KB</p>
 
   <script>
     const titleBox = document.getElementById("title");
     const contentBox = document.getElementById("content");
     const info = document.getElementById("info");
+    const charCount = document.getElementById("charCount");
+    const storageInfo = document.getElementById("storageInfo");
+
+    const MAX_CHARS = 500; // Giới hạn ký tự tối đa
 
     // === 1️⃣ Khi trang mở, đọc dữ liệu từ localStorage ===
     const savedData = localStorage.getItem("noteData");
@@ -78,10 +92,14 @@
         const note = JSON.parse(savedData);
         titleBox.value = note.title || "";
         contentBox.value = note.content || "";
+        updateCounter();
+        updateStorageUsage();
         info.textContent = `📌 Đã khôi phục ghi chú lưu lúc: ${note.savedAt}`;
       } catch (e) {
         console.error("Lỗi đọc JSON:", e);
       }
+    } else {
+      updateStorageUsage();
     }
 
     // === 2️⃣ Hàm lưu dữ liệu ===
@@ -94,6 +112,7 @@
       localStorage.setItem("noteData", JSON.stringify(noteObj));
       info.textContent = `✅ Đã lưu lúc: ${noteObj.savedAt}`;
       alert("Đã lưu ghi chú thành công!");
+      updateStorageUsage();
     }
 
     // === 3️⃣ Hàm xóa dữ liệu ===
@@ -103,7 +122,41 @@
         titleBox.value = "";
         contentBox.value = "";
         info.textContent = "❌ Ghi chú đã bị xóa.";
+        updateCounter();
+        updateStorageUsage();
       }
+    }
+
+    // === 4️⃣ Cập nhật bộ đếm ký tự ===
+    function updateCounter() {
+      const currentLength = contentBox.value.length;
+      charCount.textContent = `${currentLength} / ${MAX_CHARS} ký tự`;
+      if (currentLength >= MAX_CHARS) {
+        charCount.style.color = "red";
+      } else {
+        charCount.style.color = "#666";
+      }
+    }
+
+    contentBox.addEventListener("input", function() {
+      if (contentBox.value.length > MAX_CHARS) {
+        contentBox.value = contentBox.value.substring(0, MAX_CHARS);
+      }
+      updateCounter();
+    });
+
+    // === 5️⃣ Tính dung lượng Web Storage đã dùng ===
+    function updateStorageUsage() {
+      let total = 0;
+      for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+          const item = localStorage.getItem(key);
+          total += key.length + item.length;
+        }
+      }
+      // chuyển sang kilobyte (1 KB = 1024 byte)
+      const usedKB = (total / 1024).toFixed(2);
+      storageInfo.textContent = `📦 Dung lượng Web Storage đã dùng: ${usedKB} KB`;
     }
   </script>
 </body>

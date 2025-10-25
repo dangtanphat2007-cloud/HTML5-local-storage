@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>📝 Ghi nhớ văn bản tạm (Local Storage)</title>
+  
+</head>
+<body>
+  <h2>📝 Ghi nhớ văn bản tạm bằng Local Storage</h2>
+  <p>Nhập ghi chú của bạn bên dưới — trang này sẽ tự lưu lại văn bản!</p>
+
+  <textarea id="note" placeholder="Nhập ghi chú..."></textarea>
+  <br>
+  <button onclick="clearNote()">🗑 Xóa ghi chú</button>
+
+  <script>
+    const noteBox = document.getElementById("note");
+
+    // Khi trang tải lại, đọc dữ liệu cũ
+    noteBox.value = localStorage.getItem("note") || "";
+
+    // Tự động lưu mỗi khi người dùng gõ
+    noteBox.addEventListener("input", () => {
+      localStorage.setItem("note", noteBox.value);
+    });
+
+    // Nút xóa ghi chú
+    function clearNote() {
+      localStorage.removeItem("note");
+      noteBox.value = "";
+      alert("Đã xóa ghi chú!");
+    }
+  </script>
+  <h2> Tính tra dung lượng của webstorage</h2>
+  <p id="storageSize"></p>
+
+<script>
+function getLocalStorageSize() {
+  let total = 0;
+
+  for (let key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+      // Cộng độ dài của key và value (mỗi ký tự ~ 2 byte)
+      total += ((key.length + localStorage[key].length) * 2);
+    }
+  }
+
+  // Đổi sang KB hoặc MB
+  let kb = (total / 1024).toFixed(2);
+  let mb = (total / 1024 / 1024).toFixed(4);
+
+  return `Dung lượng localStorage đang dùng: ${kb} KB (${mb} MB)`;
+}
+
+// Hiển thị kết quả
+document.getElementById("storageSize").innerHTML = getLocalStorageSize();
+</script>
+
+</body>
+</html>

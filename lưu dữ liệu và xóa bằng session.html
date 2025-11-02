@@ -9,9 +9,23 @@
         #output { padding: 10px; border: 1px solid #ccc; margin-top: 15px; }
         input, button { padding: 8px; margin-right: 5px; }
     </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header>
+    <h1>🔬 Nghiên cứu về Web Storage trong HTML5</h1>
+    <p class="subtitle">Ứng dụng Local Storage và Session Storage trong phát triển web</p>
+  </header>
 
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="chỉnh giao diện bằng session storage.html">Session storage 1</a>
+    <a href="lưu dữ liệu và xóa bằng session.html">Session storage 2</a>
+    <a href="nhập tên và thay đổi giao diện(localstorage).html">Local storage</a>
+    <a href="phân biệt.html">Phân biệt giữa session và local storage</a>
+  </nav>
+
+  <main>
     <h2>Ví Dụ về Session Storage</h2>
     <p>Data tồn tại cho đến khi tab này được đóng</p>
 
@@ -22,7 +36,7 @@
 
     <!-- Output Display -->
     <div id="output">Loading...</div>
-
+  </main>
     <script>
         const KEY = 'simple';
         const output = document.getElementById('output');

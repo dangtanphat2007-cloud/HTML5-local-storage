@@ -2,134 +2,63 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Local & Session Storage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nghiên cứu về Web Storage trong HTML5</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>LocalStorage & SessionStorage</h1>
-   <hr>
-  <h2>Sitemap của trang web</h2>
-  <pre>
-index.html
-├── 1. Nhập họ tên (Local Storage)
-├── 2. Thay đổi giao diện tạm thời (Session Storage)
-├── 3. Thay đổi giao diện (Local Storage)
-├── 4. Ghi chú (Local Storage)
-└── 5. Thông tin tạm thời (Session Storage)
-  </pre>
+  <header>
+    <h1>🔬 Nghiên cứu về Web Storage trong HTML5</h1>
+    <p class="subtitle">Ứng dụng Local Storage và Session Storage trong phát triển web</p>
+  </header>
 
-  <!-- Khu vực Họ tên (Local Storage) -->
-  <div id="fullname-section" class="section">
-    <h2>1️⃣ Họ tên (Local Storage)</h2>
-    <input type="text" id="fullname" placeholder="Nhập họ tên">
-    <button onclick="saveFullname()">Lưu Họ Tên</button>
-  </div>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="demo.html">Demo Web Storage</a>
+    <a href="#about">Giới thiệu</a>
+    <a href="#conclusion">Kết luận</a>
+  </nav>
 
-  <!-- Khu vực Giao diện (Local Storage) -->
-  <div id="themeLocal-section" class="section">
-    <h2>2️⃣ Thay đổi giao diện (Local Storage)</h2>
-    <select id="themeLocal" onchange="changeThemeLocal()">
-      <option value="light">Sáng</option>
-      <option value="dark">Tối</option>
-    </select>
-  </div>
+  <main>
+    <section id="about">
+      <h2>1️⃣ Giới thiệu</h2>
+      <p>
+        Web Storage là một công nghệ trong HTML5 cho phép các trang web lưu trữ dữ liệu trực tiếp trong trình duyệt người dùng.
+        Nó bao gồm hai cơ chế chính:
+      </p>
+      <ul>
+        <li><strong>Local Storage:</strong> lưu dữ liệu vĩnh viễn (ngay cả khi đóng trình duyệt).</li>
+        <li><strong>Session Storage:</strong> lưu dữ liệu tạm thời (chỉ tồn tại trong phiên làm việc hiện tại).</li>
+      </ul>
+    </section>
 
-  <!-- Khu vực Thông tin tạm thời (Session Storage) -->
-  <div id="email-section" class="section">
-    <h2>3️⃣ Thông tin tạm thời (Session Storage)</h2>
-    <input type="text" id="email" placeholder="Nhập email">
-    <button onclick="saveEmail()">Lưu Email</button>
-  </div>
+    <section id="compare">
+      <h2>2️⃣ So sánh với Cookies</h2>
+      <table>
+        <tr><th>Đặc điểm</th><th>Cookies</th><th>Local Storage</th><th>Session Storage</th></tr>
+        <tr><td>Dung lượng</td><td>~4KB</td><td>~5MB</td><td>~5MB</td></tr>
+        <tr><td>Thời gian tồn tại</td><td>Có thể đặt</td><td>Vĩnh viễn</td><td>Trong phiên</td></tr>
+        <tr><td>Gửi kèm khi request</td><td>Có</td><td>Không</td><td>Không</td></tr>
+      </table>
+    </section>
 
-  <!-- Khu vực Giao diện tạm thời (Session Storage) -->
-  <div id="themeSession-section" class="section">
-    <h2>4️⃣ Thay đổi giao diện tạm thời (Session Storage)</h2>
-    <select id="themeSession" onchange="changeThemeSession()">
-      <option value="light">Sáng</option>
-      <option value="dark">Tối</option>
-    </select>
-  </div>
+    <section id="demo-link">
+      <h2>3️⃣ Trải nghiệm thử</h2>
+      <p>Bạn có thể xem ví dụ minh hoạ việc sử dụng Local Storage và Session Storage tại đây:</p>
+      <a class="button" href="demo.html">👉 Xem Demo Web Storage</a>
+    </section>
 
-  <!-- Khu vực Ghi chú (Local Storage) -->
-  <div id="note-section" class="section">
-    <h2>5️⃣ Ghi chú (Local Storage)</h2>
-    <textarea id="note" placeholder="Nhập ghi chú..."></textarea>
-    <button onclick="saveNote()">Lưu Ghi chú</button>
-  </div>
+    <section id="conclusion">
+      <h2>4️⃣ Kết luận</h2>
+      <p>
+        Web Storage là công cụ mạnh mẽ giúp các ứng dụng web lưu trữ dữ liệu người dùng mà không cần máy chủ.
+        Với Local và Session Storage, lập trình viên có thể tăng hiệu suất, giảm tải mạng, và mang lại trải nghiệm tốt hơn.
+      </p>
+    </section>
+  </main>
 
-  <script>
-    // ----------------------
-    // Fullname (Local Storage)
-    function saveFullname() {
-      const name = document.getElementById('fullname').value;
-      localStorage.setItem('fullname', name);
-      alert('Đã lưu họ tên!');
-    }
-    function loadFullname() {
-      const name = localStorage.getItem('fullname');
-      if (name) document.getElementById('fullname').value = name;
-    }
-
-    // ----------------------
-    // Theme (Local Storage)
-    function changeThemeLocal() {
-      const theme = document.getElementById('themeLocal').value;
-      localStorage.setItem('themeLocal', theme);
-      applyThemeLocal();
-    }
-    function applyThemeLocal() {
-      const theme = localStorage.getItem('themeLocal') || 'light';
-      document.body.className = theme;
-      document.getElementById('themeLocal').value = theme;
-    }
-
-    // ----------------------
-    // Email (Session Storage)
-    function saveEmail() {
-      const email = document.getElementById('email').value;
-      sessionStorage.setItem('email', email);
-      alert('Đã lưu email trong phiên!');
-    }
-    function loadEmail() {
-      const email = sessionStorage.getItem('email');
-      if (email) document.getElementById('email').value = email;
-    }
-
-    // ----------------------
-    // Theme tạm thời (Session Storage)
-    function changeThemeSession() {
-      const theme = document.getElementById('themeSession').value;
-      sessionStorage.setItem('themeSession', theme);
-      applyThemeSession();
-    }
-    function applyThemeSession() {
-      const theme = sessionStorage.getItem('themeSession');
-      if (theme) document.body.className = theme;
-      document.getElementById('themeSession').value = theme || 'light';
-    }
-
-    // ----------------------
-    // Ghi chú (Local Storage)
-    function saveNote() {
-      const note = document.getElementById('note').value;
-      localStorage.setItem('note', note);
-      alert('Đã lưu ghi chú!');
-    }
-    function loadNote() {
-      const note = localStorage.getItem('note');
-      if (note) document.getElementById('note').value = note;
-    }
-
-    // ----------------------
-    // Load dữ liệu khi mở trang
-    window.onload = function() {
-      loadFullname();
-      applyThemeLocal();
-      loadEmail();
-      applyThemeSession();
-      loadNote();
-    }
-  </script>
+  <footer>
+    <p>© 2025 - Nhóm Nghiên cứu Web Storage | Liên hệ: webstorage@example.com</p>
+  </footer>
 </body>
 </html>
-

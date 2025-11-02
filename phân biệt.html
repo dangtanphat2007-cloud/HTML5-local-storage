@@ -5,48 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local vs Session Storage Demo</title>
     <style>
-	body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-}
-
-input {
-    padding: 10px;
-    width: 60%;
-    margin-right: 5px;
-}
-
-button {
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
-}
-
-.display-section {
-    margin-top: 20px;
-    text-align: left;
-}
-
-.clear-section {
-    margin-top: 20px;
-}
-
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            width: 60%;
+            margin-right: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .display-section {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .clear-section {
+            margin-top: 20px;
+        }
+        .local { color: green; font-weight: bold; }
+        .session { color: orange; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -73,52 +69,52 @@ button {
     </div>
 
     <script>
-// Khởi tạo số lần truy cập phiên này
-if (sessionStorage.getItem("visits")) {
-    sessionStorage.setItem("visits", Number(sessionStorage.getItem("visits")) + 1);
-} else {
-    sessionStorage.setItem("visits", 1);
-}
+        // Khởi tạo số lần truy cập phiên này
+        if (sessionStorage.getItem("visits")) {
+            sessionStorage.setItem("visits", Number(sessionStorage.getItem("visits")) + 1);
+        } else {
+            sessionStorage.setItem("visits", 1);
+        }
 
-// Hiển thị dữ liệu ban đầu
-function displayData() {
-    const localName = localStorage.getItem("userName") || "Chưa có dữ liệu";
-    const sessionName = sessionStorage.getItem("userName") || "Chưa có dữ liệu";
-    const visits = sessionStorage.getItem("visits") || 0;
+        // Hiển thị dữ liệu ban đầu
+        function displayData() {
+            const localName = localStorage.getItem("userName") || "Chưa có dữ liệu";
+            const sessionName = sessionStorage.getItem("userName") || "Chưa có dữ liệu";
+            const visits = sessionStorage.getItem("visits") || 0;
 
-    document.getElementById("localData").innerText = "Local Storage: " + localName;
-    document.getElementById("sessionData").innerText = "Session Storage: " + sessionName;
-    document.getElementById("visitCount").innerText = "Số lần truy cập (phiên này): " + visits;
-}
+            document.getElementById("localData").innerHTML = "Local Storage: <span class='local'>" + localName + "</span>";
+            document.getElementById("sessionData").innerHTML = "Session Storage: <span class='session'>" + sessionName + "</span>";
+            document.getElementById("visitCount").innerText = "Số lần truy cập (phiên này): " + visits;
+        }
 
-// Lưu dữ liệu vào Local Storage
-function saveLocal() {
-    const name = document.getElementById("username").value;
-    localStorage.setItem("userName", name);
-    displayData();
-}
+        // Lưu dữ liệu vào Local Storage
+        function saveLocal() {
+            const name = document.getElementById("username").value;
+            localStorage.setItem("userName", name);
+            displayData();
+        }
 
-// Lưu dữ liệu vào Session Storage
-function saveSession() {
-    const name = document.getElementById("username").value;
-    sessionStorage.setItem("userName", name);
-    displayData();
-}
+        // Lưu dữ liệu vào Session Storage
+        function saveSession() {
+            const name = document.getElementById("username").value;
+            sessionStorage.setItem("userName", name);
+            displayData();
+        }
 
-// Xóa Local Storage
-function clearLocal() {
-    localStorage.removeItem("userName");
-    displayData();
-}
+        // Xóa Local Storage
+        function clearLocal() {
+            localStorage.removeItem("userName");
+            displayData();
+        }
 
-// Xóa Session Storage
-function clearSession() {
-    sessionStorage.removeItem("userName");
-    displayData();
-}
+        // Xóa Session Storage
+        function clearSession() {
+            sessionStorage.removeItem("userName");
+            displayData();
+        }
 
-// Hiển thị khi load trang
-window.onload = displayData;
-</scrypt>
+        // Hiển thị khi load trang
+        window.onload = displayData;
+    </script>
 </body>
 </html>

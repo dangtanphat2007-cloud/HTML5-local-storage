@@ -3,7 +3,7 @@
 ## 🏠 index.html
 Trang web có 5 khu vực chức năng:
 
-1. [Họ tên (Local Storage)](#họ-tên-local-storage)
+1. [Nhập Họ tên (Local Storage)](#họ-tên-local-storage)
    - Lưu họ tên người dùng vào Local Storage.
 2. [Giao diện (Local Storage)](#giao-diện-local-storage)
    - Thay đổi theme sáng/tối và lưu lại bằng Local Storage.

@@ -15,14 +15,54 @@
         /* chế độ tối */
         body.dark { background-color: #333; color: #f0f0f0; }
         button { padding: 10px 20px; cursor: pointer; }
+        header {
+  background: #004aad;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.subtitle {
+  font-style: italic;
+}
+
+nav {
+  background: #e8e8e8;
+  text-align: center;
+  padding: 10px;
+}
+
+nav a {
+  margin: 0 15px;
+  color: #004aad;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
     </style>
 </head>
 <body>
+    <header>
+    <h1>🔬 Nghiên cứu về Web Storage trong HTML5</h1>
+    <p class="subtitle">Ứng dụng Local Storage và Session Storage trong phát triển web</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="chỉnh giao diện bằng session storage.html">Session storage 1</a>
+    <a href="lưu dữ liệu và xóa bằng session.html">Session storage 2</a>
+    <a href="nhập tên và thay đổi giao diện(localstorage).html">Local storage</a>
+    <a href="phân biệt.html">Phân biệt giữa session và local storage</a>
+  </nav>
+    <main>
 
     <h1>Ví dụ Storage Session</h1>
     <p id="status">Current Mode: Unknown</p>
     <button id="toggleBtn" onclick="toggleAndSaveMode()">Toggle Mode</button>
-
+</main>
     <script>
         const MODE_KEY = 'current_theme';
         const body = document.body;

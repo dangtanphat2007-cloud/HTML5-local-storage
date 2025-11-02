@@ -1,4 +1,4 @@
-# 🌐 Sitemap – Demo LocalStorage & SessionStorage
+# 🌐 Sitemap – LocalStorage & SessionStorage
 
 ## 🏠 index.html
 Trang web có 5 khu vực chức năng:

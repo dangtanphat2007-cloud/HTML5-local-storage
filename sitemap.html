@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Sitemap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    ul {
+      list-style-type: none; /* bỏ bullet */
+    }
+    li::before {
+      content: "📄 "; /* icon cho mỗi mục */
+    }
+    li ul li::before {
+      content: "➡️ "; /* icon cho sub mục */
+    }
+  </style>
+</head>
+<body>
+  <h1>Sitemap của trang web</h1>
+  <ul>
+    <li>index.html
+      <ul>
+        <li>Nhập họ tên (Local Storage)</li>
+        <li>Thay đổi giao diện tạm thời (Session Storage)</li>
+        <li>Thay đổi giao diện (Local Storage)</li>
+        <li>Ghi chú (Local Storage)</li>
+        <li>Thông tin tạm thời (Session Storage)</li>
+      </ul>
+    </li>
+  </ul>
+</body>
+</html>

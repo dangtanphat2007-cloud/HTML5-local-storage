@@ -166,9 +166,16 @@ function applyThemeLocal() {
       applyThemeSession();
       displayNote();
     };
+    function changeThemeSession2() {
+  const theme = document.getElementById('themeSession').value;
+  sessionStorage.setItem('themeSession', theme);
+  applyThemeSession();
+  applyThemeLocal(); // đảm bảo chữ hiển thị đúng
+}
   </script>
 </body>
 </html>
+
 
 
 

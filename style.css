@@ -1,46 +1,83 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  transition: background-color 0.3s, color 0.3s;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f7f9fb;
+  color: #333;
+  margin: 0;
+  line-height: 1.6;
 }
 
-/* Sections */
-.section {
-  margin-bottom: 30px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+header {
+  background: #004aad;
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 
-/* Inputs & textarea */
-input[type="text"], textarea, select {
-  padding: 5px;
+.subtitle {
+  font-style: italic;
+}
+
+nav {
+  background: #e8e8e8;
+  text-align: center;
+  padding: 10px;
+}
+
+nav a {
+  margin: 0 15px;
+  color: #004aad;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  color: #004aad;
+}
+
+table {
   width: 100%;
-  max-width: 300px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
-/* Buttons */
-button {
-  padding: 5px 10px;
-  margin-top: 5px;
+table, th, td {
+  border: 1px solid #aaa;
+  padding: 8px;
+  text-align: center;
 }
 
-/* Themes */
-body.light {
-  background-color: #ffffff;
-  color: #000000;
+.button {
+  display: inline-block;
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-body.dark {
-  background-color: #000000;
-  color: #ffffff;
+.button:hover {
+  background: #0056b3;
 }
 
-/* Input & textarea trong dark mode */
-body.dark input, body.dark textarea, body.dark select {
-  background-color: #333333;
-  color: #ffffff;
-  border: 1px solid #777;
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #004aad;
+  color: white;
+  margin-top: 30px;
+  font-size: 0.9em;
 }

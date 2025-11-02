@@ -2,60 +2,167 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nghiên cứu về Web Storage trong HTML5</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Demo Local & Session Storage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    input, textarea, select, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🔬 Nghiên cứu về Web Storage trong HTML5</h1>
-    <p class="subtitle">Ứng dụng Local Storage và Session Storage trong phát triển web</p>
-  </header>
 
-  <nav>
-    <a href="index.html">Trang chủ</a>
-    <a href="vd1.html">Ví dụ 1</a>
-    <a href="vd2.html">Ví dụ 2</a>
-    <a href="vd3.html">Ví dụ 3</a>
-    <a href="vd4.html">Ví dụ 4</a>
-  </nav>
+  <h1>🌐 Demo LocalStorage & SessionStorage</h1>
 
-  <main>
-    <section id="about">
-      <h2>1️⃣ Giới thiệu</h2>
-      <p>
-        Web Storage là một công nghệ trong HTML5 cho phép các trang web lưu trữ dữ liệu trực tiếp trong trình duyệt người dùng.
-        Nó bao gồm hai cơ chế chính:
-      </p>
-      <ul>
-        <li><strong>Local Storage:</strong> lưu dữ liệu vĩnh viễn (ngay cả khi đóng trình duyệt).</li>
-        <li><strong>Session Storage:</strong> lưu dữ liệu tạm thời (chỉ tồn tại trong phiên làm việc hiện tại).</li>
-      </ul>
-    </section>
-    <section id="demo-link">
-      <h2>2️⃣ Trải nghiệm thử</h2>
-      <p>Bạn có thể xem ví dụ minh hoạ việc sử dụng Local Storage và Session Storage tại đây:</p>
-      <a class="button" href="vd1.html">👉 Xem Ví dụ 1 Web Storage</a>
-      <a class="button" href="vd2.html">👉 Xem Ví dụ 2 Web Storage</a>
-      <a class="button" href="vd3.html">👉 Xem Ví dụ 3 Web Storage</a>
-      <a class="button" href="vd4.html">👉 Xem Ví dụ 4 Web Storage</a>
-    </section>
-    <section id="conclusion">
-      <h2>3️⃣ Kết luận</h2>
-      <p>
-        Web Storage là công cụ mạnh mẽ giúp các ứng dụng web lưu trữ dữ liệu người dùng mà không cần máy chủ.
-        Với Local và Session Storage, lập trình viên có thể tăng hiệu suất, giảm tải mạng, và mang lại trải nghiệm tốt hơn.
-      </p>
-    </section>
-  </main>
-  <footer>
-    <p>© 2025 - Nhóm Nghiên cứu Web Storage | Liên hệ: webstorage@example.com</p>
-  </footer>
+  <!-- 1️⃣ Khu vực nhập họ tên - dùng Local Storage -->
+  <div class="section">
+    <h2>1️⃣ Họ tên (Local Storage)</h2>
+    <input type="text" id="fullname" placeholder="Nhập họ tên của bạn">
+    <button onclick="saveName()">Lưu tên</button>
+    <p><strong>Họ tên đã lưu:</strong> <span id="savedName"></span></p>
+  </div>
+
+  <!-- 2️⃣ Khu vực thay đổi giao diện - dùng Local Storage -->
+  <div class="section">
+    <h2>2️⃣ Giao diện (Local Storage)</h2>
+    <select id="themeLocal" onchange="changeThemeLocal()">
+      <option value="light">🌞 Sáng</option>
+      <option value="dark">🌙 Tối</option>
+    </select>
+  </div>
+
+  <!-- 3️⃣ Ghi nhớ thông tin - dùng Session Storage -->
+  <div class="section">
+    <h2>3️⃣ Thông tin tạm thời (Session Storage)</h2>
+    <input type="text" id="email" placeholder="Nhập email">
+    <button onclick="saveEmail()">Lưu Email</button>
+    <p><strong>Email tạm lưu:</strong> <span id="savedEmail"></span></p>
+  </div>
+
+  <!-- 4️⃣ Giao diện tạm thời - dùng Session Storage -->
+  <div class="section">
+    <h2>4️⃣ Giao diện tạm thời (Session Storage)</h2>
+    <select id="themeSession" onchange="changeThemeSession()">
+      <option value="default">Mặc định</option>
+      <option value="blue">Xanh dương</option>
+      <option value="pink">Hồng</option>
+    </select>
+  </div>
+
+  <!-- 5️⃣ Ghi nhớ văn bản - dùng Local Storage -->
+  <div class="section">
+    <h2>5️⃣ Ghi chú (Local Storage)</h2>
+    <textarea id="note" rows="5" placeholder="Nhập ghi chú của bạn..."></textarea>
+    <button onclick="saveNote()">Lưu ghi chú</button>
+    <p><strong>Ghi chú đã lưu:</strong></p>
+    <pre id="savedNote" style="background:#eee; padding:10px;"></pre>
+  </div>
+
+  <script>
+    // ====== 1️⃣ Họ tên (Local Storage) ======
+    function saveName() {
+      const name = document.getElementById('fullname').value;
+      localStorage.setItem('fullname', name);
+      displayName();
+    }
+
+    function displayName() {
+      const name = localStorage.getItem('fullname') || '(chưa có)';
+      document.getElementById('savedName').textContent = name;
+    }
+
+    // ====== 2️⃣ Giao diện (Local Storage) ======
+    function changeThemeLocal() {
+      const theme = document.getElementById('themeLocal').value;
+      localStorage.setItem('themeLocal', theme);
+      applyThemeLocal();
+    }
+
+    function applyThemeLocal() {
+      const theme = localStorage.getItem('themeLocal');
+      if (theme === 'dark') {
+        document.body.style.backgroundColor = '#222';
+        document.body.style.color = '#fff';
+      } else {
+        document.body.style.backgroundColor = '#f5f5f5';
+        document.body.style.color = '#000';
+      }
+      document.getElementById('themeLocal').value = theme || 'light';
+    }
+
+    // ====== 3️⃣ Thông tin tạm thời (Session Storage) ======
+    function saveEmail() {
+      const email = document.getElementById('email').value;
+      sessionStorage.setItem('email', email);
+      displayEmail();
+    }
+
+    function displayEmail() {
+      const email = sessionStorage.getItem('email') || '(chưa có)';
+      document.getElementById('savedEmail').textContent = email;
+    }
+
+    // ====== 4️⃣ Giao diện tạm thời (Session Storage) ======
+    function changeThemeSession() {
+      const theme = document.getElementById('themeSession').value;
+      sessionStorage.setItem('themeSession', theme);
+      applyThemeSession();
+    }
+
+    function applyThemeSession() {
+      const theme = sessionStorage.getItem('themeSession');
+      switch (theme) {
+        case 'blue':
+          document.body.style.backgroundColor = '#cce5ff';
+          break;
+        case 'pink':
+          document.body.style.backgroundColor = '#ffe6f2';
+          break;
+        default:
+          break;
+      }
+      document.getElementById('themeSession').value = theme || 'default';
+    }
+
+    // ====== 5️⃣ Ghi chú (Local Storage) ======
+    function saveNote() {
+      const note = document.getElementById('note').value;
+      localStorage.setItem('note', note);
+      displayNote();
+    }
+
+    function displayNote() {
+      const note = localStorage.getItem('note') || '(chưa có ghi chú)';
+      document.getElementById('savedNote').textContent = note;
+    }
+
+    // ====== Khởi tạo khi tải trang ======
+    window.onload = function() {
+      displayName();
+      applyThemeLocal();
+      displayEmail();
+      applyThemeSession();
+      displayNote();
+    };
+  </script>
 </body>
 </html>
-
-
-
-
-
-

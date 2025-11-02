@@ -46,9 +46,49 @@
       background-color: #444;
       color: #f9c74f;
     }
+        header {
+  background: #004aad;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.subtitle {
+  font-style: italic;
+}
+
+nav {
+  background: #e8e8e8;
+  text-align: center;
+  padding: 10px;
+}
+
+nav a {
+  margin: 0 15px;
+  color: #004aad;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
+    <header>
+    <h1>🔬 Nghiên cứu về Web Storage trong HTML5</h1>
+    <p class="subtitle">Ứng dụng Local Storage và Session Storage trong phát triển web</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="chỉnh giao diện bằng session storage.html">Session storage 1</a>
+    <a href="lưu dữ liệu và xóa bằng session.html">Session storage 2</a>
+    <a href="nhập tên và thay đổi giao diện(localstorage).html">Local storage</a>
+    <a href="phân biệt.html">Phân biệt giữa session và local storage</a>
+  </nav>
+<main>
      <h2>💾 Demo Local Storage + Giao diện Light/Dark</h2>
   <p>Nhập tên và lưu lại, chế độ theme cũng sẽ được ghi nhớ!</p>
 
@@ -61,7 +101,7 @@
   <button class="theme-btn" onclick="toggleTheme()">🌗 Đổi giao diện</button>
 
   <p id="output"></p>
-
+</main>
   <script>
     // 🌟 Hàm lưu tên vào localStorage
     function saveName() {

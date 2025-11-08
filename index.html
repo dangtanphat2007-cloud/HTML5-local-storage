@@ -22,33 +22,162 @@
 
   <main>
     <section id="about">
-      <h2>1️⃣ Giới thiệu</h2>
+      <h2>📘 1. Giới thiệu chung về HTML5 Web Storage</h2>
       <p>
-        Web Storage là một công nghệ trong HTML5 cho phép các trang web lưu trữ dữ liệu trực tiếp trong trình duyệt người dùng.
-        Nó bao gồm hai cơ chế chính:
+        HTML5 Web Storage là một tính năng mạnh mẽ của HTML5 cho phép ứng dụng web lưu trữ dữ liệu trực tiếp trên trình duyệt của người dùng dưới dạng cặp khóa – giá trị (<strong>key–value</strong>).
+      </p>
+      <p>
+        Điều này giúp trang web ghi nhớ thông tin người dùng mà không cần gửi dữ liệu lên máy chủ mỗi lần tải lại trang, giảm băng thông và tăng hiệu suất.
+      </p>
+
+      <h3>🔸 So sánh với Cookie truyền thống</h3>
+      <table>
+        <tr><th>Tiêu chí</th><th>Cookie</th><th>Web Storage</th></tr>
+        <tr><td>Dung lượng</td><td>Khoảng 4 KB</td><td>5–10 MB</td></tr>
+        <tr><td>Gửi kèm request</td><td>Có (gửi lên server mỗi lần tải trang)</td><td>Không gửi lên server</td></tr>
+        <tr><td>Tốc độ truy xuất</td><td>Chậm hơn</td><td>Nhanh hơn</td></tr>
+        <tr><td>Dễ sử dụng</td><td>Cần thao tác phức tạp</td><td>Dễ dàng qua JavaScript</td></tr>
+        <tr><td>Lưu dạng</td><td>Chuỗi (string)</td><td>Cặp key–value</td></tr>
+      </table>
+    </section>
+    <section id="types">
+      <h2>2️⃣ Các loại Web Storage</h2>
+      <p>
+        HTML5 Web Storage có hai loại chính: <strong>Local Storage</strong> và <strong>Session Storage</strong>.
       </p>
       <ul>
-        <li><strong>Local Storage:</strong> lưu dữ liệu vĩnh viễn (ngay cả khi đóng trình duyệt).</li>
-        <li><strong>Session Storage:</strong> lưu dữ liệu tạm thời (chỉ tồn tại trong phiên làm việc hiện tại).</li>
+        <li><strong>Local Storage:</strong> Lưu trữ dữ liệu vô thời hạn cho đến khi bị xóa thủ công hoặc bằng mã JavaScript.</li>
+        <li><strong>Session Storage:</strong> Lưu dữ liệu tạm thời trong phiên làm việc hiện tại, sẽ bị xóa khi đóng tab/trình duyệt.</li>
+      </ul>
+      <p>
+        Cả hai đều lưu dữ liệu dưới dạng cặp khóa–giá trị, nhưng khác nhau ở thời gian tồn tại.
+      </p>
+    </section>
+
+    <section id="localstorage">
+      <h2>3️⃣ Local Storage</h2>
+      <p><strong>🧠 Khái niệm:</strong> Local Storage là phần của HTML5 Web Storage, dùng để lưu trữ dữ liệu vĩnh viễn trên trình duyệt của người dùng.</p>
+      <p>Dữ liệu không mất khi người dùng đóng tab, tắt trình duyệt hoặc khởi động lại máy tính.</p>
+
+      <h3>🔹 Đặc điểm của Local Storage</h3>
+      <table>
+        <tr><th>Đặc điểm</th><th>Mô tả</th></tr>
+        <tr><td>Dung lượng</td><td>Khoảng 5–10 MB tùy trình duyệt</td></tr>
+        <tr><td>Thời gian</td><td>Vô thời hạn (cho đến khi bị xóa)</td></tr>
+        <tr><td>Phạm vi</td><td>Theo domain</td></tr>
+        <tr><td>Truy cập</td><td>Chỉ trong cùng domain</td></tr>
+        <tr><td>Dữ liệu</td><td>Lưu dạng chuỗi (string)</td></tr>
+      </table>
+
+      <h3>📍 Khi nào nên dùng Local Storage?</h3>
+      <ul>
+        <li>Lưu chế độ giao diện (Dark / Light mode)</li>
+        <li>Lưu tên người dùng, ngôn ngữ ưa thích</li>
+        <li>Lưu giỏ hàng, thông tin người dùng lâu dài</li>
+        <li>Lưu token đăng nhập (kèm biện pháp bảo mật)</li>
+      </ul>
+
+      <h3>⚠️ Nhược điểm</h3>
+      <ul>
+        <li>Không được mã hóa → không nên lưu dữ liệu nhạy cảm</li>
+        <li>Không chia sẻ giữa các domain</li>
+        <li>Chỉ lưu được chuỗi (string) → phải dùng JSON.stringify() nếu là object</li>
+      </ul>
+    </section>
+
+    <section id="sessionstorage">
+      <h2>4️⃣ Session Storage</h2>
+      <p><strong>Khái niệm:</strong> Lưu trữ dữ liệu tạm thời trong phiên làm việc hiện tại (tab).</p>
+      <p>Dữ liệu sẽ mất khi người dùng đóng tab hoặc trình duyệt.</p>
+
+      <h3>🔹 Đặc điểm của Session Storage</h3>
+      <table>
+        <tr><th>Đặc điểm</th><th>Mô tả</th></tr>
+        <tr><td>Dung lượng</td><td>Khoảng 5 MB</td></tr>
+        <tr><td>Thời gian</td><td>Tồn tại trong một phiên làm việc</td></tr>
+        <tr><td>Phạm vi</td><td>Theo tab + domain</td></tr>
+        <tr><td>Truy cập</td><td>Mỗi tab riêng biệt</td></tr>
+        <tr><td>Dữ liệu</td><td>Dạng chuỗi (string)</td></tr>
+      </table>
+
+      <h3>📍 Khi nào nên dùng Session Storage?</h3>
+      <ul>
+        <li>Lưu dữ liệu tạm trong 1 tab</li>
+        <li>Lưu giỏ hàng tạm thời khi chưa đăng nhập</li>
+        <li>Giữ thông tin form đang nhập</li>
+        <li>Lưu trạng thái tạm thời của ứng dụng</li>
+      </ul>
+    </section>
+
+    <section id="compare">
+      <h2>5️⃣ So sánh Local Storage và Session Storage</h2>
+      <table>
+        <tr><th>Tiêu chí</th><th>Local Storage</th><th>Session Storage</th></tr>
+        <tr><td>Thời gian lưu</td><td>Vĩnh viễn</td><td>Chỉ trong phiên hiện tại</td></tr>
+        <tr><td>Dung lượng</td><td>5–10 MB</td><td>~5 MB</td></tr>
+        <tr><td>Khi đóng tab</td><td>Vẫn còn</td><td>Mất</td></tr>
+        <tr><td>Phạm vi</td><td>Toàn domain</td><td>Theo từng tab</td></tr>
+        <tr><td>Truy cập</td><td>Dùng chung giữa các tab</td><td>Tab riêng biệt</td></tr>
+        <tr><td>Bảo mật</td><td>Không cao</td><td>Không cao</td></tr>
+        <tr><td>Khi nên dùng</td><td>Lưu lâu dài</td><td>Lưu tạm thời</td></tr>
+      </table>
+    </section>
+
+    <section id="advantages">
+      <h2>6️⃣ Ưu điểm & Hạn chế của Web Storage</h2>
+
+      <h3>✅ Ưu điểm:</h3>
+      <ul>
+        <li>Dễ sử dụng, không cần server</li>
+        <li>Dung lượng lớn hơn cookie nhiều</li>
+        <li>Truy xuất nhanh hơn</li>
+        <li>Không gửi dữ liệu lên server → bảo mật hơn cookie</li>
+      </ul>
+
+      <h3>⚠️ Hạn chế:</h3>
+      <ul>
+        <li>Không mã hóa dữ liệu</li>
+        <li>Không dùng được giữa các domain khác nhau</li>
+        <li>Chỉ lưu được chuỗi (string)</li>
+        <li>Chỉ hoạt động ở client-side</li>
+      </ul>
+    </section>
+
+    <section id="difference">
+      <h2>7️⃣ Sự khác nhau giữa LocalStorage và Cookies</h2>
+      <ul>
+        <li><strong>LocalStorage</strong> chỉ truy cập được trên trình duyệt (client).</li>
+        <li><strong>Cookies</strong> có thể truy cập cả client và server.</li>
+        <li>Cookies có thời gian hết hạn, dung lượng chỉ khoảng 4 KB.</li>
+        <li>Cookies gửi kèm mỗi request → tốn băng thông hơn.</li>
       </ul>
     </section>
     <section id="demo-link">
-      <h2>2️⃣ Trải nghiệm thử</h2>
-      <p>Bạn có thể xem ví dụ minh hoạ việc sử dụng Local Storage và Session Storage tại đây:</p>
+      <h2>3️⃣ Trải nghiệm thử</h2>
+      <p>Bạn có thể xem ví dụ minh hoạ việc sử dụng Local Storage và Session Storage tại đây:</p> 
       <a class="button" href="chỉnh giao diện bằng session storage.html">Session storage 1</a>
       <a class="button" href="lưu dữ liệu và xóa bằng session.html">Session storage 2</a>
       <a class="button" href="nhập tên và thay đổi giao diện(localstorage).html">Local storage</a>
       <a class="button" href="phân biệt.html">Phân biệt giữa session và local storage</a>
     </section>
-
-    <section id="conclusion">
-      <h2>3️⃣ Kết luận</h2>
+    
+     <section id="final">
+      <h2>9️⃣ Kết luận</h2>
       <p>
-        Web Storage là công cụ mạnh mẽ giúp các ứng dụng web lưu trữ dữ liệu người dùng mà không cần máy chủ.
-        Với Local và Session Storage, lập trình viên có thể tăng hiệu suất, giảm tải mạng, và mang lại trải nghiệm tốt hơn.
+        HTML5 Web Storage giúp trang web lưu trữ dữ liệu trực tiếp trên trình duyệt người dùng, cải thiện hiệu suất và trải nghiệm.
+      </p>
+      <ul>
+        <li><strong>Local Storage:</strong> phù hợp lưu trữ lâu dài (thông tin người dùng, theme,...)</li>
+        <li><strong>Session Storage:</strong> phù hợp lưu tạm thời (dữ liệu form, giỏ hàng,...)</li>
+      </ul>
+      <p>
+        Cả hai là giải pháp hiện đại thay thế cookie, giúp phát triển web dễ dàng và hiệu quả hơn.
+      </p>
+    </section>
       </p>
     </section>
   </main>
+
 
 
 
